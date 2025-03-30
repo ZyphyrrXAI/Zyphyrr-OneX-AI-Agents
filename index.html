@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zyphyrr OneX AI Agent</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@lukso/web3.js@latest/dist/web3.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0d1117;
+            color: white;
+            padding: 20px;
+        }
+        button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Zyphyrr OneX AI Agent</h1>
+    <p>Connect your LUKSO Universal Profile and automate your Web3 experience.</p>
+    <button onclick="connectUP()">Connect Universal Profile</button>
+    <p id="status">Status: Not Connected</p>
+
+    <script>
+        async function connectUP() {
+            if (window.ethereum) {
+                const web3 = new Web3(window.ethereum);
+                try {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const accounts = await web3.eth.getAccounts();
+                    document.getElementById("status").innerText = "Connected: " + accounts[0];
+                } catch (error) {
+                    console.error(error);
+                    document.getElementById("status").innerText = "Connection Failed";
+                }
+            } else {
+                alert("Please install a LUKSO-compatible wallet.");
+            }
+        }
+    </script>
+</body>
+</html>
